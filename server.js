@@ -29,6 +29,7 @@ app.get('/', (req,res) =>{
     res.send(db.users);
 })
 
+app.get('/', (req, res) => {res.send('shit is getting real!')})
 app.post('/signin',signin.handleSignin(db, bcrypt)); //defferent method to run this function
 app.post('/register', (req, res) =>{register.handleRegister(req, res, db, bcrypt)});
 app.get('/profile/:id', (req, res) =>{ profile.handleProfileGet(req, res, db)});
