@@ -14,10 +14,8 @@ const image = require('./consrollers/image');
 const db = knex({
     client: 'pg',
     connection: {
-      host : '127.0.0.1',
-      user : 'meytar',
-      password : '1234567890',
-      database : 'smart-brain'
+      connectString : process.env.DATABASE_URL,
+      ssl: true  
     }
   });
 
@@ -29,8 +27,8 @@ app.get('/', (req,res) =>{
     res.send(db.users);
 })
 
-app.get('/', (req, res) => {res.send('shit is getting real!')})
-app.post('/signin',signin.handleSignin(db, bcrypt)); //defferent method to run this function
+app.get('/', (req, res) => {res.send('shit is getting real!')});
+app.post('/signin',signin.handleSignin(db, bcrypt)); //different method to run this function
 app.post('/register', (req, res) =>{register.handleRegister(req, res, db, bcrypt)});
 app.get('/profile/:id', (req, res) =>{ profile.handleProfileGet(req, res, db)});
 app.put('/image', (req, res) => {image.handleImage(req, res, db)});
